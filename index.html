@@ -1,0 +1,139 @@
+import React, { useState } from 'react';
+import { Star, ShoppingBag, Award, Leaf, Heart, Mail, ShoppingCart } from 'lucide-react';
+
+const MiLediLuxePreview = () => {
+  const [cart, setCart] = useState([]);
+  const [showOrderForm, setShowOrderForm] = useState(false);
+
+  const products = [
+    {
+      id: 1,
+      name: 'Luxurious Rejuvenating Body Mousse',
+      price: 35,
+      volume: '200ml / 6.76 fl oz',
+      description: 'Premium anti-age mousse enriched with 17 precious oils and 4 botanical extracts',
+      features: ['17 Precious Oils', '4 Botanical Extracts'],
+      benefits: ['Intensive Rejuvenation', 'Deep Nourishment'],
+      fragrances: ['Peach', 'Coconut', 'Cinnamon', 'Mango-Papaya', 'Mint']
+    },
+    {
+      id: 2,
+      name: 'Luxurious Watermelon Body Scrub',
+      price: 25,
+      volume: '300g / 10.5 oz',
+      description: 'Premium exfoliating scrub with chia seeds and precious oils complex',
+      features: ['Natural Chia Seeds', 'Premium Natural Oils'],
+      benefits: ['Perfect Exfoliation', 'Skin Renewal'],
+      fragrances: ['Fresh Watermelon', 'Peach', 'Coconut', 'Cinnamon', 'Mango-Papaya', 'Mint']
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-pink-50">
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <h1 className="text-3xl font-serif text-purple-900">MiLeDi • LUXE</h1>
+          <button className="flex items-center gap-2 text-purple-600">
+            <ShoppingCart className="w-5 h-5" />
+            <span className="bg-purple-100 rounded-full w-6 h-6 flex items-center justify-center text-sm">
+              {cart.length}
+            </span>
+          </button>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-purple-100/50 to-pink-100/50 py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl font-serif text-purple-900 mb-6">Welcome to MiLeDi • LUXE</h2>
+            <p className="text-purple-800 mb-8 text-lg">
+              Hello! I'm Valeriia, creator of premium body cosmetics with enhanced active ingredients.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-serif text-center text-purple-900 mb-16">Our Products</h2>
+          
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {products.map((product, index) => (
+              <div key={product.id} className="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <img 
+                  src={index === 0 ? "/api/placeholder/600/400" : "/api/placeholder/600/400"}
+                  alt={product.name}
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-8">
+                  <h3 className="text-2xl font-serif text-purple-900 mb-4">{product.name}</h3>
+                  <p className="text-purple-800 mb-4">{product.description}</p>
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    {product.features.map((feature, i) => (
+                      <div key={i} className="flex items-center">
+                        <Star className="w-4 h-4 text-purple-400 mr-2" />
+                        <span className="text-purple-800 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-between mt-6">
+                    <div>
+                      <p className="text-3xl font-semibold text-purple-900">${product.price}</p>
+                      <p className="text-sm text-purple-600">{product.volume}</p>
+                    </div>
+                    <button className="bg-purple-900 text-white px-8 py-3 rounded-full">
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-gradient-to-r from-purple-100/50 to-pink-100/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-serif text-center text-purple-900 mb-16">Our Standards</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-12 max-w-4xl mx-auto">
+            {[
+              { icon: <Leaf className="w-10 h-10" />, text: "100% Natural" },
+              { icon: <Heart className="w-10 h-10" />, text: "Cruelty-Free" },
+              { icon: <Award className="w-10 h-10" />, text: "Handcrafted" },
+              { icon: <Star className="w-10 h-10" />, text: "Premium Quality" },
+              { icon: <ShoppingBag className="w-10 h-10" />, text: "Vegan Formula" },
+              { icon: <Leaf className="w-10 h-10" />, text: "Paraben-Free" }
+            ].map((feature, index) => (
+              <div key={index} className="text-center transform hover:scale-105 transition-transform">
+                <div className="flex justify-center text-purple-600 mb-4">
+                  {feature.icon}
+                </div>
+                <p className="text-purple-800 font-medium">{feature.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-purple-900 text-white py-12">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-2xl font-serif mb-4">MiLeDi • LUXE</p>
+          <div className="flex items-center justify-center gap-2 text-purple-200">
+            <Mail className="w-5 h-5" />
+            <a href="mailto:miledi.luxe@gmail.com" className="hover:text-white transition-colors">
+              miledi.luxe@gmail.com
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default MiLediLuxePreview;You need to enable JavaScript to run this app.
+
